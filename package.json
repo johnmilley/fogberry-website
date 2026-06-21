@@ -1,0 +1,11 @@
+{
+  "name": "fogberry-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Marketing site for Fogberry Games (fogberrygames.ca / .com)",
+  "scripts": {
+    "build": "node build.js",
+    "serve": "node build.js && cd _site && python3 -m http.server 8099"
+  },
+  "license": "UNLICENSED"
+}

@@ -1,0 +1,38 @@
+{
+  "site": {
+    "company": "Fogberry Games",
+    "tagline": "Self-publishing board game company",
+    "location": "Corner Brook, Newfoundland",
+    "email": "info@fogberrygames.com"
+  },
+  "home": {
+    "heading": "Welcome to Fogberry Games!",
+    "body": "We are a self-publishing board game company based in Corner Brook, Newfoundland."
+  },
+  "games": {
+    "heading": "Introducing our first card game: Jig!",
+    "body": "Jig is a competitive game of memory, deduction, and revenge! Fish for cards from the opposing team, paying attention to what other players ask for and what they get. When you think your team has all the cards of one colour, you can “land” them — but you must know exactly who has which cards, or else the other team steals the point!",
+    "release": "Coming late 2026 / early 2027!",
+    "history_heading": "History of the game",
+    "history_body": "Jig is based on a folk game called Fish, which is played with a standard deck of cards and likely named because it sounds a bit like you’re playing the children’s game Go Fish (instead of “Do you have any 2s?”, a player might ask “Do you have the 2 of clubs?”). There seems to be no written record of Fish; it was introduced to the author at McGill University in the early 2000s.\n\nThe original game had some drawbacks, including the challenge of defining 8 or 9 equal sets in a standard deck of cards. Jig was created to solve this problem, with a custom deck of nine coloured sets, so that we could share this addictive little game with the world. It also introduces a 4-player variant and an optional “shark” rule for ultra-competitive players.\n\nThe name is a nod to the original: “jigging” is a traditional fishing method in Newfoundland and Labrador. The jigger hook and wooden reel are treasured symbols of the province’s fishing heritage."
+  },
+  "about": {
+    "author_heading": "About the author",
+    "author_body": "Jig was created by Rebecca Milley. Rebecca grew up in Ramea, a tiny island town off the southwest coast of Newfoundland. She has a PhD in combinatorial game theory from Dalhousie University and is a mathematics professor at Memorial University’s Grenfell Campus.",
+    "artist_heading": "About the artist",
+    "artist_body": "The art for Jig was created by Richard White, originally from the beautiful Codroy Valley and currently living in Corner Brook.",
+    "artist_link_label": "You can see more of his work here.",
+    "artist_link_url": ""
+  },
+  "email": {
+    "heading": "Join our email list!",
+    "body": "Sign up here to get the latest updates for Jig and future games, including the Kickstarter launch date and information for preordering (expected Fall 2026).",
+    "form_action": "",
+    "form_email_field": "email",
+    "button_label": "Sign me up"
+  },
+  "contact": {
+    "heading": "Get in touch",
+    "body": "If you have questions, or if you would like to request a reviewer copy of Jig, email us anytime."
+  }
+}

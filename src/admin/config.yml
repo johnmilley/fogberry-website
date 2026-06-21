@@ -1,0 +1,97 @@
+# ============================================================
+# Fogberry Games — content editor configuration (Sveltia/Decap CMS)
+#
+# This drives the editing screen at /admin. It edits a single file,
+# content.json, then commits the change to GitHub. GitHub Pages
+# rebuilds the site automatically (usually live within ~1–2 minutes).
+#
+# >>> Before the editor will work, fill in <OWNER>/<REPO> below and
+#     complete the one-time GitHub login setup (see README.md). <<<
+# ============================================================
+
+backend:
+  name: github
+  repo: OWNER/REPO            # e.g. fogberrygames/fogberry_website  ← EDIT THIS
+  branch: main
+  # Sveltia CMS handles GitHub login. For a project on GitHub Pages you must
+  # provide an OAuth app + relay (see README "Turning on the editor").
+  # base_url: https://your-oauth-relay.example.workers.dev
+
+# Where the editor stores uploaded images (e.g. new game art).
+media_folder: "src/assets"
+public_folder: "assets"
+
+# Show a live preview link while editing.
+site_url: https://OWNER.github.io/REPO/      # ← EDIT THIS (or your domain)
+display_url: https://OWNER.github.io/REPO/
+
+collections:
+  - name: "content"
+    label: "Website content"
+    description: "Everything on the Fogberry Games home page."
+    files:
+      - name: "site"
+        label: "Page content"
+        file: "src/content.json"
+        # A friendly note shown at the top of the editor.
+        description: >
+          Edit any text below and click Publish. Leave a blank line between
+          paragraphs to start a new paragraph.
+        fields:
+          - label: "Site basics"
+            name: "site"
+            widget: "object"
+            fields:
+              - { label: "Company name", name: "company", widget: "string" }
+              - { label: "Tagline", name: "tagline", widget: "string" }
+              - { label: "Location", name: "location", widget: "string" }
+              - { label: "Contact email", name: "email", widget: "string", pattern: ['^\S+@\S+\.\S+$', "Please enter a valid email address"] }
+
+          - label: "Home (welcome) section"
+            name: "home"
+            widget: "object"
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Body text", name: "body", widget: "text" }
+
+          - label: "Games section"
+            name: "games"
+            widget: "object"
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Intro text", name: "body", widget: "text" }
+              - { label: "Release line (badge)", name: "release", widget: "string" }
+              - { label: "History heading", name: "history_heading", widget: "string" }
+              - { label: "History text", name: "history_body", widget: "text" }
+
+          - label: "About section"
+            name: "about"
+            widget: "object"
+            fields:
+              - { label: "Author heading", name: "author_heading", widget: "string" }
+              - { label: "Author bio", name: "author_body", widget: "text" }
+              - { label: "Artist heading", name: "artist_heading", widget: "string" }
+              - { label: "Artist bio", name: "artist_body", widget: "text" }
+              - { label: "Artist link text", name: "artist_link_label", widget: "string", required: false }
+              - { label: "Artist link URL", name: "artist_link_url", widget: "string", required: false }
+
+          - label: "Email list section"
+            name: "email"
+            widget: "object"
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Body text", name: "body", widget: "text" }
+              - label: "Sign-up form action URL"
+                name: "form_action"
+                widget: "string"
+                required: false
+                hint: "Paste the form URL from your newsletter tool (Mailchimp, Buttondown, etc.). Leave blank to show an 'email us' message instead."
+              - { label: "Form email field name", name: "form_email_field", widget: "string", required: false, default: "email" }
+              - { label: "Button label", name: "button_label", widget: "string", default: "Sign me up" }
+
+          - label: "Contact section"
+            name: "contact"
+            widget: "object"
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Body text", name: "body", widget: "text" }
