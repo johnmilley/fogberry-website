@@ -11,7 +11,7 @@
 
 backend:
   name: github
-  repo: OWNER/REPO            # e.g. fogberrygames/fogberry_website  ← EDIT THIS
+  repo: johnmilley/fogberry-website
   branch: main
   # Sveltia CMS handles GitHub login. For a project on GitHub Pages you must
   # provide an OAuth app + relay (see README "Turning on the editor").
@@ -22,8 +22,8 @@ media_folder: "src/assets"
 public_folder: "assets"
 
 # Show a live preview link while editing.
-site_url: https://OWNER.github.io/REPO/      # ← EDIT THIS (or your domain)
-display_url: https://OWNER.github.io/REPO/
+site_url: https://johnmilley.github.io/fogberry-website/      # ← EDIT THIS (or your domain)
+display_url: https://johnmilley.github.io/fogberry-website/
 
 collections:
   - name: "content"
