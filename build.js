@@ -69,6 +69,14 @@ const navLinksFor = (prefix) =>
 const cardAlt =
   'Illustration of a traditional Newfoundland jigger: a wooden handline reel wound with twine and a fishing hook.';
 
+// Turn any email address appearing in rendered text into a mailto link,
+// so the contact email reads as part of the sentence rather than a button.
+const linkifyEmails = (html) =>
+  html.replace(
+    /([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})/g,
+    '<a href="mailto:$1">$1</a>'
+  );
+
 // Email list section: render a real signup form when a form action is set,
 // otherwise a graceful "email us to be added" fallback.
 function emailSection() {
@@ -200,16 +208,19 @@ const homeMain = `
     </section>
 
     <section id="games" class="section">
-      <div class="wrap narrow center">
-        <h2>${esc(c.games.heading)}</h2>
-        ${paras(c.games.body)}
-        <p class="badge">${esc(c.games.release)}</p>
-        <figure class="games__art">
-          <img src="assets/jig-card.webp" width="500" height="688"
-               alt="${cardAlt}" loading="lazy">
-          <figcaption>The jigger &mdash; art from the Jig deck</figcaption>
-        </figure>
-        <a class="btn" href="jig/">${esc(c.games.history_heading)} &rarr;</a>
+      <div class="wrap center">
+        <h2>Games</h2>
+        <div class="game-list">
+          <a class="game-card" href="jig/" aria-label="${esc(c.games.heading)}">
+            <img class="game-card__art" src="assets/jig-card.webp" width="500" height="688"
+                 alt="${cardAlt}" loading="lazy">
+            <span class="game-card__body">
+              <span class="game-card__title">${esc(c.games.heading)}</span>
+              <span class="badge">${esc(c.games.release)}</span>
+              <span class="game-card__more">Learn more &rarr;</span>
+            </span>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -227,8 +238,7 @@ const homeMain = `
     <section id="contact" class="section">
       <div class="wrap narrow center">
         <h2>${esc(c.contact.heading)}</h2>
-        ${paras(c.contact.body)}
-        <a class="btn" href="mailto:${esc(c.site.email)}">${esc(c.site.email)}</a>
+        ${linkifyEmails(paras(c.contact.body))}
         <p class="copyright">&copy; ${year} ${esc(c.site.company)} &middot; ${esc(c.site.location)}</p>
       </div>
     </section>`;
@@ -240,27 +250,29 @@ const homeHtml = layout({
   main: homeMain,
 });
 
-// ---------- Jig page (/jig/) ----------
-const backLink = `<p class="back-link"><a href="../#games">&larr; Back to ${esc(c.site.company)}</a></p>`;
-const jigDesc = String(c.games.history_body).replace(/\s+/g, ' ').trim().slice(0, 155);
+// ---------- Jig page (/jig/) — the full product page for the game ----------
+const jigDesc = String(c.games.body).replace(/\s+/g, ' ').trim().slice(0, 155);
 const jigMain = `
     <section id="jig" class="section">
       <div class="wrap narrow center">
-        ${backLink}
-        <h1>${esc(c.games.history_heading)}</h1>
+        <h1>${esc(c.games.heading)}</h1>
+        ${paras(c.games.body)}
+        <p class="badge">${esc(c.games.release)}</p>
         <figure class="games__art">
           <img src="../assets/jig-card.webp" width="500" height="688"
                alt="${cardAlt}" loading="lazy">
           <figcaption>The jigger &mdash; art from the Jig deck</figcaption>
         </figure>
-        ${paras(c.games.history_body)}
-        ${backLink}
+        <div class="game-history">
+          <h2>${esc(c.games.history_heading)}</h2>
+          ${paras(c.games.history_body)}
+        </div>
       </div>
     </section>`;
 
 const jigHtml = layout({
   prefix: '../',
-  title: `${c.games.history_heading} — Jig | ${c.site.company}`,
+  title: `Jig — ${c.site.company}`,
   description: jigDesc,
   main: jigMain,
 });

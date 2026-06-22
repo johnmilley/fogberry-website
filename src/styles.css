@@ -208,18 +208,44 @@ main > section:nth-child(even) { background: var(--section-b); }
 .signup button:hover { background: var(--orange); border-color: var(--orange); }
 .signup-fallback { margin-top: 1rem; color: var(--ink-soft); font-style: italic; }
 
-/* ---------- back link (Jig page) ---------- */
-.section .back-link { text-align: center; margin: 0 0 1.75rem; }
-.section .back-link:last-child { margin: 2.25rem 0 0; } /* the bottom one */
-.back-link a {
-  font-family: "Newsreader", serif;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 0.82rem;
-  color: var(--ink);
+/* ---------- games listing (home) ---------- */
+.game-list { display: grid; gap: 1.5rem; max-width: 580px; margin: 2rem auto 0; }
+.game-card {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--ink);
+  background: #fff;
   text-decoration: none;
+  color: var(--ink);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
 }
-.back-link a:hover { color: var(--orange-dark); }
+.game-card:hover { box-shadow: 7px 7px 0 var(--orange); transform: translate(-2px, -2px); }
+.game-card__art {
+  width: 150px; flex: 0 0 150px;
+  object-fit: cover; object-position: center;
+  border-right: 1px solid var(--ink);
+}
+.game-card__body {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 0.7rem;
+  padding: 1.4rem 1.5rem; text-align: left;
+}
+.game-card__title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 700; font-size: 1.4rem; line-height: 1.15;
+}
+.game-card__more {
+  font-family: "Newsreader", serif;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  font-size: 0.8rem; color: var(--orange-dark); margin-top: auto;
+}
+
+/* ---------- game history block (Jig page) ---------- */
+.game-history {
+  margin-top: clamp(2.25rem, 5vw, 3.5rem);
+  padding-top: clamp(1.75rem, 4vw, 2.5rem);
+  border-top: 1px solid var(--rule);
+}
+.game-history h2 { margin-bottom: 0.6rem; }
 
 /* ---------- copyright (bottom of contact) ---------- */
 .section .copyright {
@@ -242,6 +268,8 @@ main > section:nth-child(even) { background: var(--section-b); }
   .nav__links.is-open { display: flex; }
   .nav__links a { border-left: 0; border-top: 1px solid var(--rule); text-align: center; }
   .games__art img { max-width: 260px; }
+  .game-card { flex-direction: column; }
+  .game-card__art { width: 100%; flex: none; height: 200px; border-right: 0; border-bottom: 1px solid var(--ink); }
   .cards { grid-template-columns: 1fr; }
   .card { border-left: 0; border-top: 1px solid var(--rule); }
   .card:first-child { border-top: 0; }
