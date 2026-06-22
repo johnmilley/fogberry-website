@@ -168,21 +168,19 @@ const html = `<!DOCTYPE html>
     </section>
 
     <section id="games" class="section">
-      <div class="wrap games">
-        <div class="games__text">
-          <h2>${esc(c.games.heading)}</h2>
-          ${paras(c.games.body)}
-          <p class="badge">${esc(c.games.release)}</p>
-        </div>
+      <div class="wrap narrow center">
+        <h2>${esc(c.games.heading)}</h2>
+        ${paras(c.games.body)}
+        <p class="badge">${esc(c.games.release)}</p>
         <figure class="games__art">
           <img src="assets/jig-card.webp" width="500" height="688"
                alt="Illustration of a traditional Newfoundland jigger: a wooden handline reel wound with twine and a fishing hook." loading="lazy">
           <figcaption>The jigger &mdash; art from the Jig deck</figcaption>
         </figure>
-      </div>
-      <div class="wrap narrow history">
-        <h3>${esc(c.games.history_heading)}</h3>
-        ${paras(c.games.history_body)}
+        <div class="history">
+          <h3>${esc(c.games.history_heading)}</h3>
+          ${paras(c.games.history_body)}
+        </div>
       </div>
     </section>
 
