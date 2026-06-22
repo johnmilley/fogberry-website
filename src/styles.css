@@ -212,7 +212,7 @@ main > section:nth-child(even) { background: var(--section-b); }
 .footer {
   padding: 2.5rem 0;
   text-align: center;
-  border-top: 3px double var(--rule-strong);
+  background: var(--blue-fog);
 }
 .footer p { margin: 0 0 0.3rem; }
 .footer strong { font-family: "Fraunces", serif; }
