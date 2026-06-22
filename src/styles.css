@@ -208,15 +208,26 @@ main > section:nth-child(even) { background: var(--section-b); }
 .signup button:hover { background: var(--orange); border-color: var(--orange); }
 .signup-fallback { margin-top: 1rem; color: var(--ink-soft); font-style: italic; }
 
-/* ---------- footer ---------- */
-.footer {
-  padding: 2.5rem 0;
-  text-align: center;
-  background: var(--blue-fog);
+/* ---------- back link (Jig page) ---------- */
+.section .back-link { text-align: center; margin: 0 0 1.75rem; }
+.section .back-link:last-child { margin: 2.25rem 0 0; } /* the bottom one */
+.back-link a {
+  font-family: "Newsreader", serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.82rem;
+  color: var(--ink);
+  text-decoration: none;
 }
-.footer p { margin: 0 0 0.3rem; }
-.footer strong { font-family: "Fraunces", serif; }
-.footer .muted { color: var(--ink-soft); font-size: 0.9rem; }
+.back-link a:hover { color: var(--orange-dark); }
+
+/* ---------- copyright (bottom of contact) ---------- */
+.section .copyright {
+  text-align: center;
+  margin: 2.75rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
 
 /* ---------- responsive ---------- */
 @media (max-width: 760px) {

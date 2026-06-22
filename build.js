@@ -59,9 +59,15 @@ const siteTitle = `${c.site.company} — ${c.site.tagline}`;
 const metaDesc = `${c.site.company}: a self-publishing board game company in ${c.site.location}. Home of Jig, a competitive card game of memory, deduction, and revenge.`;
 
 // ---------- section renderers ----------
-const navLinks = NAV.map((n) => `<a href="#${esc(n.id)}">${esc(n.label)}</a>`).join(
-  '\n            '
-);
+// `prefix` makes links/assets resolve from any depth: '' on the home page,
+// '../' on /jig/. Nav anchors point back to the home page's sections.
+const navLinksFor = (prefix) =>
+  NAV.map((n) => `<a href="${prefix}#${esc(n.id)}">${esc(n.label)}</a>`).join(
+    '\n            '
+  );
+
+const cardAlt =
+  'Illustration of a traditional Newfoundland jigger: a wooden handline reel wound with twine and a fishing hook.';
 
 // Email list section: render a real signup form when a form action is set,
 // otherwise a graceful "email us to be added" fallback.
@@ -113,37 +119,39 @@ function aboutCards() {
           </article>`;
 }
 
-// ---------- page ----------
-const html = `<!DOCTYPE html>
+// ---------- layout (shared shell for every page) ----------
+// `prefix` is '' for the home page and '../' for pages in a subfolder (/jig/).
+function layout({ prefix, title, description, main }) {
+  return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>${esc(siteTitle)}</title>
-  <meta name="description" content="${esc(metaDesc)}">
+  <title>${esc(title)}</title>
+  <meta name="description" content="${esc(description)}">
   <meta name="theme-color" content="#e8551f">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="${esc(siteTitle)}">
-  <meta property="og:description" content="${esc(metaDesc)}">
-  <meta property="og:image" content="assets/logo-social.jpg">
+  <meta property="og:title" content="${esc(title)}">
+  <meta property="og:description" content="${esc(description)}">
+  <meta property="og:image" content="${prefix}assets/logo-social.jpg">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="icon" href="assets/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="icon" href="${prefix}assets/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="${prefix}assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="${prefix}assets/apple-touch-icon.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="${prefix}styles.css">
 </head>
 <body>
-  <a class="skip-link" href="#home">Skip to content</a>
+  <a class="skip-link" href="#content">Skip to content</a>
 
   <header class="masthead">
-    <a class="masthead__brand" href="#home" aria-label="${esc(c.site.company)} home">
-      <img src="assets/logo.webp" width="300" height="150" alt="${esc(c.site.company)} logo">
+    <a class="masthead__brand" href="${prefix}#home" aria-label="${esc(c.site.company)} home">
+      <img src="${prefix}assets/logo.webp" width="300" height="150" alt="${esc(c.site.company)} logo">
     </a>
   </header>
 
@@ -151,64 +159,14 @@ const html = `<!DOCTYPE html>
     <div class="wrap nav__inner">
       <button class="nav__toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">Menu</button>
       <div class="nav__links" id="nav-links">
-        ${navLinks}
+        ${navLinksFor(prefix)}
       </div>
     </div>
   </nav>
 
-  <main>
-    <section id="home" class="hero">
-      <div class="wrap narrow center">
-        <h1>${esc(c.home.heading)}</h1>
-        <div class="lede">
-          ${paras(c.home.body)}
-        </div>
-      </div>
-    </section>
-
-    <section id="games" class="section">
-      <div class="wrap narrow center">
-        <h2>${esc(c.games.heading)}</h2>
-        ${paras(c.games.body)}
-        <p class="badge">${esc(c.games.release)}</p>
-        <figure class="games__art">
-          <img src="assets/jig-card.webp" width="500" height="688"
-               alt="Illustration of a traditional Newfoundland jigger: a wooden handline reel wound with twine and a fishing hook." loading="lazy">
-          <figcaption>The jigger &mdash; art from the Jig deck</figcaption>
-        </figure>
-        <div class="history">
-          <h3>${esc(c.games.history_heading)}</h3>
-          ${paras(c.games.history_body)}
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="section section--tint">
-      <div class="wrap narrow">
-        <h2 class="center">About</h2>
-        <div class="cards">
-          ${aboutCards()}
-        </div>
-      </div>
-    </section>
-
-    ${emailSection()}
-
-    <section id="contact" class="section">
-      <div class="wrap narrow center">
-        <h2>${esc(c.contact.heading)}</h2>
-        ${paras(c.contact.body)}
-        <a class="btn" href="mailto:${esc(c.site.email)}">${esc(c.site.email)}</a>
-      </div>
-    </section>
+  <main id="content">
+${main}
   </main>
-
-  <footer class="footer">
-    <div class="wrap center">
-      <p><strong>${esc(c.site.company)}</strong> &middot; ${esc(c.site.location)}</p>
-      <p class="muted">&copy; ${year} ${esc(c.site.company)}. All rights reserved.</p>
-    </div>
-  </footer>
 
   <script>
     // Mobile nav toggle + close on link tap.
@@ -228,6 +186,84 @@ const html = `<!DOCTYPE html>
 </body>
 </html>
 `;
+}
+
+// ---------- home page ----------
+const homeMain = `
+    <section id="home" class="hero">
+      <div class="wrap narrow center">
+        <h1>${esc(c.home.heading)}</h1>
+        <div class="lede">
+          ${paras(c.home.body)}
+        </div>
+      </div>
+    </section>
+
+    <section id="games" class="section">
+      <div class="wrap narrow center">
+        <h2>${esc(c.games.heading)}</h2>
+        ${paras(c.games.body)}
+        <p class="badge">${esc(c.games.release)}</p>
+        <figure class="games__art">
+          <img src="assets/jig-card.webp" width="500" height="688"
+               alt="${cardAlt}" loading="lazy">
+          <figcaption>The jigger &mdash; art from the Jig deck</figcaption>
+        </figure>
+        <a class="btn" href="jig/">${esc(c.games.history_heading)} &rarr;</a>
+      </div>
+    </section>
+
+    <section id="about" class="section section--tint">
+      <div class="wrap narrow">
+        <h2 class="center">About</h2>
+        <div class="cards">
+          ${aboutCards()}
+        </div>
+      </div>
+    </section>
+
+    ${emailSection()}
+
+    <section id="contact" class="section">
+      <div class="wrap narrow center">
+        <h2>${esc(c.contact.heading)}</h2>
+        ${paras(c.contact.body)}
+        <a class="btn" href="mailto:${esc(c.site.email)}">${esc(c.site.email)}</a>
+        <p class="copyright">&copy; ${year} ${esc(c.site.company)} &middot; ${esc(c.site.location)}</p>
+      </div>
+    </section>`;
+
+const homeHtml = layout({
+  prefix: '',
+  title: siteTitle,
+  description: metaDesc,
+  main: homeMain,
+});
+
+// ---------- Jig page (/jig/) ----------
+const backLink = `<p class="back-link"><a href="../#games">&larr; Back to ${esc(c.site.company)}</a></p>`;
+const jigDesc = String(c.games.history_body).replace(/\s+/g, ' ').trim().slice(0, 155);
+const jigMain = `
+    <section id="jig" class="section">
+      <div class="wrap narrow center">
+        ${backLink}
+        <h1>${esc(c.games.history_heading)}</h1>
+        <figure class="games__art">
+          <img src="../assets/jig-card.webp" width="500" height="688"
+               alt="${cardAlt}" loading="lazy">
+          <figcaption>The jigger &mdash; art from the Jig deck</figcaption>
+        </figure>
+        ${paras(c.games.history_body)}
+        ${backLink}
+      </div>
+    </section>`;
+
+const jigHtml = layout({
+  prefix: '../',
+  title: `${c.games.history_heading} — Jig | ${c.site.company}`,
+  description: jigDesc,
+  main: jigMain,
+});
 
 // ---------- write output ----------
 fs.rmSync(OUT, { recursive: true, force: true });
@@ -237,7 +273,9 @@ copyRecursive(path.join(SRC, 'admin'), path.join(OUT, 'admin'));
 fs.copyFileSync(path.join(SRC, 'styles.css'), path.join(OUT, 'styles.css'));
 // .nojekyll tells GitHub Pages to serve files as-is (no Jekyll processing).
 fs.writeFileSync(path.join(OUT, '.nojekyll'), '');
-fs.writeFileSync(path.join(OUT, 'index.html'), html);
+fs.writeFileSync(path.join(OUT, 'index.html'), homeHtml);
+fs.mkdirSync(path.join(OUT, 'jig'), { recursive: true });
+fs.writeFileSync(path.join(OUT, 'jig', 'index.html'), jigHtml);
 fs.writeFileSync(
   path.join(OUT, 'robots.txt'),
   'User-agent: *\nAllow: /\nDisallow: /admin/\n'
