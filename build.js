@@ -163,7 +163,6 @@ const html = `<!DOCTYPE html>
         <div class="lede">
           ${paras(c.home.body)}
         </div>
-        <a class="btn" href="#games">Meet Jig &rarr;</a>
       </div>
     </section>
 
