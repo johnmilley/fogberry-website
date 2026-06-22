@@ -87,7 +87,6 @@ function emailSection() {
   return `
       <section id="email" class="section section--tint">
         <div class="wrap narrow center">
-          <p class="kicker">Stay in the loop</p>
           <h2>${esc(e.heading)}</h2>
           ${paras(e.body)}
           ${inner}
@@ -136,7 +135,7 @@ const html = `<!DOCTYPE html>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400;1,9..144,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -146,7 +145,6 @@ const html = `<!DOCTYPE html>
     <a class="masthead__brand" href="#home" aria-label="${esc(c.site.company)} home">
       <img src="assets/logo.webp" width="300" height="150" alt="${esc(c.site.company)} logo">
     </a>
-    <p class="masthead__tagline">${esc(c.site.tagline)} &middot; ${esc(c.site.location)}</p>
   </header>
 
   <nav class="nav" aria-label="Primary">
@@ -172,7 +170,6 @@ const html = `<!DOCTYPE html>
     <section id="games" class="section">
       <div class="wrap games">
         <div class="games__text">
-          <p class="kicker">Our first game</p>
           <h2>${esc(c.games.heading)}</h2>
           ${paras(c.games.body)}
           <p class="badge">${esc(c.games.release)}</p>
@@ -190,8 +187,7 @@ const html = `<!DOCTYPE html>
     </section>
 
     <section id="about" class="section section--tint">
-      <div class="wrap">
-        <p class="kicker center">The people behind Jig</p>
+      <div class="wrap narrow">
         <h2 class="center">About</h2>
         <div class="cards">
           ${aboutCards()}
@@ -203,7 +199,6 @@ const html = `<!DOCTYPE html>
 
     <section id="contact" class="section">
       <div class="wrap narrow center">
-        <p class="kicker">Contact</p>
         <h2>${esc(c.contact.heading)}</h2>
         ${paras(c.contact.body)}
         <a class="btn" href="mailto:${esc(c.site.email)}">${esc(c.site.email)}</a>
