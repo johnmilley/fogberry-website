@@ -108,22 +108,23 @@ function emailSection() {
       </section>`;
 }
 
-function aboutCards() {
-  const a = c.about;
+// The author/artist bios belong to the game, so they render on the Jig page.
+function creatorCards() {
+  const g = c.games;
   const link =
-    a.artist_link_url && a.artist_link_url.trim()
-      ? ` <a href="${esc(a.artist_link_url)}" target="_blank" rel="noopener">${esc(
-          a.artist_link_label || 'See more of his work.'
+    g.artist_link_url && g.artist_link_url.trim()
+      ? ` <a href="${esc(g.artist_link_url)}" target="_blank" rel="noopener">${esc(
+          g.artist_link_label || 'See more of his work.'
         )}</a>`
       : '';
   return `
           <article class="card">
-            <h3>${esc(a.author_heading)}</h3>
-            ${paras(a.author_body)}
+            <h3>${esc(g.author_heading)}</h3>
+            ${paras(g.author_body)}
           </article>
           <article class="card">
-            <h3>${esc(a.artist_heading)}</h3>
-            ${paras(a.artist_body)}${link ? `\n            <p>${link.trim()}</p>` : ''}
+            <h3>${esc(g.artist_heading)}</h3>
+            ${paras(g.artist_body)}${link ? `\n            <p>${link.trim()}</p>` : ''}
           </article>`;
 }
 
@@ -225,11 +226,9 @@ const homeMain = `
     </section>
 
     <section id="about" class="section section--tint">
-      <div class="wrap narrow">
-        <h2 class="center">About</h2>
-        <div class="cards">
-          ${aboutCards()}
-        </div>
+      <div class="wrap narrow center">
+        <h2>${esc(c.about.heading)}</h2>
+        ${paras(c.about.body)}
       </div>
     </section>
 
@@ -266,6 +265,9 @@ const jigMain = `
         <div class="game-history">
           <h2>${esc(c.games.history_heading)}</h2>
           ${paras(c.games.history_body)}
+        </div>
+        <div class="cards">
+          ${creatorCards()}
         </div>
       </div>
     </section>`;
