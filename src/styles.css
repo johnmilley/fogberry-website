@@ -209,34 +209,37 @@ main > section:nth-child(even) { background: var(--section-b); }
 .signup-fallback { margin-top: 1rem; color: var(--ink-soft); font-style: italic; }
 
 /* ---------- games listing (home) ---------- */
-.game-list { display: grid; gap: 1.5rem; max-width: 580px; margin: 2rem auto 0; }
+.game-list {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 1.75rem; margin: 2rem auto 0;
+}
 .game-card {
-  display: flex;
-  align-items: stretch;
+  display: flex; flex-direction: column;
+  flex: 0 1 300px; max-width: 320px;
   border: 1px solid var(--ink);
   background: #fff;
   text-decoration: none;
   color: var(--ink);
   transition: box-shadow 0.15s ease, transform 0.15s ease;
 }
-.game-card:hover { box-shadow: 7px 7px 0 var(--orange); transform: translate(-2px, -2px); }
+.game-card:hover { box-shadow: 9px 9px 0 var(--orange); transform: translate(-3px, -3px); }
 .game-card__art {
-  width: 150px; flex: 0 0 150px;
-  object-fit: cover; object-position: center;
-  border-right: 1px solid var(--ink);
+  display: block;
+  width: 100%; height: auto;          /* show the whole card, no cropping */
+  border-bottom: 1px solid var(--ink);
 }
 .game-card__body {
-  display: flex; flex-direction: column; align-items: flex-start; gap: 0.7rem;
-  padding: 1.4rem 1.5rem; text-align: left;
+  display: flex; flex-direction: column; align-items: center; gap: 0.7rem;
+  padding: 1.4rem 1.5rem; text-align: center;
 }
 .game-card__title {
   font-family: "Playfair Display", Georgia, serif;
-  font-weight: 700; font-size: 1.4rem; line-height: 1.15;
+  font-weight: 700; font-size: 1.35rem; line-height: 1.18;
 }
 .game-card__more {
   font-family: "Newsreader", serif;
   text-transform: uppercase; letter-spacing: 0.1em;
-  font-size: 0.8rem; color: var(--orange-dark); margin-top: auto;
+  font-size: 0.8rem; color: var(--orange-dark);
 }
 
 /* ---------- game history block (Jig page) ---------- */
@@ -268,8 +271,6 @@ main > section:nth-child(even) { background: var(--section-b); }
   .nav__links.is-open { display: flex; }
   .nav__links a { border-left: 0; border-top: 1px solid var(--rule); text-align: center; }
   .games__art img { max-width: 260px; }
-  .game-card { flex-direction: column; }
-  .game-card__art { width: 100%; flex: none; height: 200px; border-right: 0; border-bottom: 1px solid var(--ink); }
   .cards { grid-template-columns: 1fr; }
   .card { border-left: 0; border-top: 1px solid var(--rule); }
   .card:first-child { border-top: 0; }
